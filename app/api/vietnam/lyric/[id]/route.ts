@@ -64,3 +64,4 @@ export async function GET(request: NextRequest, { params }: PageProps) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+

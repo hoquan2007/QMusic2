@@ -21,3 +21,4 @@ describe("ZingMp3 Vietnamese Music Provider", () => {
     expect(prov.name).toBe("audius");
   });
 });
+

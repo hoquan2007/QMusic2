@@ -66,11 +66,16 @@ export function AudioEngine() {
     };
     const onError = () => {
       const err = audio.error;
+      const track = useAudioPlayerStore.getState().currentTrack;
       let msg = "Không thể phát bài hát này.";
       if (err?.code === MediaError.MEDIA_ERR_NETWORK) {
         msg = "Lỗi kết nối mạng khi tải luồng âm thanh.";
       } else if (err?.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
-        msg = "Định dạng âm thanh hoặc nguồn phát không được hỗ trợ.";
+        if (track?.provider === "zingmp3") {
+          msg = "Bài hát này thuộc danh mục VIP hoặc hiện không có luồng phát miễn phí.";
+        } else {
+          msg = "Định dạng âm thanh hoặc nguồn phát không được hỗ trợ.";
+        }
       }
       _setError(msg);
       _setIsLoading(false);
@@ -114,7 +119,6 @@ export function AudioEngine() {
       _setError(null);
 
       audio.src = currentTrack.streamUrl;
-      audio.load();
 
       if (isPlaying) {
         audio.play().catch((err) => {
@@ -127,7 +131,7 @@ export function AudioEngine() {
         });
       }
     }
-  }, [currentTrack, isPlaying, _setIsLoading, _setError, _setIsPlaying]);
+  }, [currentTrack?.id, currentTrack?.streamUrl, isPlaying, _setIsLoading, _setError, _setIsPlaying]);
 
   // Sync play/pause state
   useEffect(() => {
@@ -135,7 +139,7 @@ export function AudioEngine() {
     if (!audio || !currentTrack) return;
 
     if (isPlaying) {
-      if (audio.paused) {
+      if (audio.paused && audio.src) {
         audio.play().catch((err) => {
           if (err.name !== "AbortError") {
             console.warn("Audio play rejected:", err);
@@ -148,7 +152,7 @@ export function AudioEngine() {
         audio.pause();
       }
     }
-  }, [isPlaying, currentTrack, _setIsPlaying]);
+  }, [isPlaying]);
 
   // Sync volume & mute
   useEffect(() => {

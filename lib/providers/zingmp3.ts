@@ -126,3 +126,4 @@ export class ZingMp3Provider implements MusicProvider {
     return [];
   }
 }
+

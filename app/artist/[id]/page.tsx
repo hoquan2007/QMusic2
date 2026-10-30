@@ -34,7 +34,7 @@ export default function ArtistDetailPage({ params }: PageProps) {
     error: artistError,
   } = useQuery({
     queryKey: ["artistDetail", artistId],
-    queryFn: () => musicRegistry.getArtist(`audius:${artistId}`),
+    queryFn: () => musicRegistry.getArtist(artistId),
   });
 
   const { data: artistTracks = [], isLoading: isTracksLoading } = useQuery({

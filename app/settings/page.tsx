@@ -139,6 +139,22 @@ export default function SettingsPage() {
         </h2>
 
         <div className="space-y-3">
+          {/* Zing MP3 */}
+          <div className="flex items-center justify-between p-3.5 rounded-xl bg-black/30 border border-white/5">
+            <div className="flex items-center gap-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div>
+                <h4 className="text-sm font-bold text-white">Zing MP3 Network</h4>
+                <p className="text-xs text-slate-400">
+                  Nguồn âm nhạc Việt Nam chính (V-Pop, #zingchart, nghệ sĩ Việt)
+                </p>
+              </div>
+            </div>
+            <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+              Đang hoạt động
+            </span>
+          </div>
+
           {/* Audius */}
           <div className="flex items-center justify-between p-3.5 rounded-xl bg-black/30 border border-white/5">
             <div className="flex items-center gap-3">
@@ -146,7 +162,7 @@ export default function SettingsPage() {
               <div>
                 <h4 className="text-sm font-bold text-white">Audius Music Network</h4>
                 <p className="text-xs text-slate-400">
-                  Nguồn streaming nhạc chính (Miễn phí, phân tán)
+                  Nguồn streaming nhạc quốc tế (Miễn phí, phân tán)
                 </p>
               </div>
             </div>

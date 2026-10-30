@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { Play, Pause, Sparkles, Flame, Radio, Heart } from "lucide-react";
+import { Play, Pause, Sparkles, Flame, Radio, Heart, Music } from "lucide-react";
 import { musicRegistry } from "@/lib/providers/registry";
 import { useAudioPlayerStore } from "@/stores/audioPlayerStore";
 import { useLibraryStore } from "@/stores/libraryStore";
@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 
 const GENRES = [
   "Tất cả",
+  "Nhạc Việt (V-Pop)",
   "Electronic",
   "Hip-Hop/Rap",
   "Pop",
@@ -33,7 +34,13 @@ export default function HomePage() {
   const { currentTrack, isPlaying, playTrack, togglePlay } = useAudioPlayerStore();
   const { history, isFavorite, toggleFavorite } = useLibraryStore();
 
-  // Fetch trending tracks
+  // Fetch Vietnamese trending chart tracks
+  const { data: vnTrendingTracks = [], isLoading: isVnLoading } = useQuery({
+    queryKey: ["vietnamTrendingHome"],
+    queryFn: () => musicRegistry.getVietnameseTrendingTracks(12),
+  });
+
+  // Fetch international trending tracks
   const {
     data: trendingTracks = [],
     isLoading: isTracksLoading,
@@ -41,10 +48,12 @@ export default function HomePage() {
   } = useQuery({
     queryKey: ["trendingTracks", selectedGenre],
     queryFn: () =>
-      musicRegistry.getTrendingTracks(
-        24,
-        selectedGenre === "Tất cả" ? undefined : selectedGenre
-      ),
+      selectedGenre === "Nhạc Việt (V-Pop)"
+        ? musicRegistry.getVietnameseTrendingTracks(24)
+        : musicRegistry.getTrendingTracks(
+            24,
+            selectedGenre === "Tất cả" ? undefined : selectedGenre
+          ),
   });
 
   // Fetch trending playlists
@@ -53,7 +62,7 @@ export default function HomePage() {
     queryFn: () => musicRegistry.getTrendingPlaylists(6),
   });
 
-  const heroTrack: MusicTrack | undefined = trendingTracks[0];
+  const heroTrack: MusicTrack | undefined = vnTrendingTracks[0] || trendingTracks[0];
   const isHeroPlaying = currentTrack?.id === heroTrack?.id && isPlaying;
   const isHeroFav = heroTrack ? isFavorite(heroTrack.id) : false;
 
@@ -62,7 +71,7 @@ export default function HomePage() {
     if (currentTrack?.id === heroTrack.id) {
       togglePlay();
     } else {
-      playTrack(heroTrack, trendingTracks);
+      playTrack(heroTrack, vnTrendingTracks.length > 0 ? vnTrendingTracks : trendingTracks);
     }
   };
 
@@ -176,6 +185,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Top Vietnamese Music Section (#zingchart) */}
+      <section>
+        <SectionHeader
+          title="Bảng xếp hạng Nhạc Việt (#zingchart)"
+          subtitle="Top ca khúc Việt Nam được yêu thích nhất thời điểm hiện tại"
+          actionHref="/discover"
+        />
+
+        {isVnLoading ? (
+          <GridSkeleton count={6} />
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {vnTrendingTracks.slice(0, 12).map((track) => (
+              <TrackCard
+                key={track.id}
+                track={track}
+                queueContext={vnTrendingTracks}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+
       {/* Recently Played from Listening History */}
       {history.length > 0 && (
         <section>
@@ -200,7 +232,7 @@ export default function HomePage() {
       <section>
         <SectionHeader
           title={`Thịnh hành • ${selectedGenre}`}
-          subtitle="Những ca khúc đang được nghe nhiều nhất trên Audius"
+          subtitle="Những ca khúc đang được nghe nhiều nhất"
           actionHref="/discover"
         />
 
@@ -212,7 +244,7 @@ export default function HomePage() {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-            {trendingTracks.slice(1, 19).map((track) => (
+            {trendingTracks.slice(0, 18).map((track) => (
               <TrackCard
                 key={track.id}
                 track={track}
@@ -241,4 +273,3 @@ export default function HomePage() {
     </div>
   );
 }
-

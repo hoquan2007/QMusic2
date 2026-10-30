@@ -45,7 +45,7 @@ export default function TrackDetailPage({ params }: PageProps) {
     error: trackError,
   } = useQuery({
     queryKey: ["trackDetail", trackId],
-    queryFn: () => musicRegistry.getTrack(`audius:${trackId}`),
+    queryFn: () => musicRegistry.getTrack(trackId),
   });
 
   // Fetch more tracks from this artist
@@ -60,10 +60,10 @@ export default function TrackDetailPage({ params }: PageProps) {
 
   // Fetch lyrics
   const { data: lyricsData, isLoading: isLyricsLoading } = useQuery<SyncedLyrics | null>({
-    queryKey: ["trackLyrics", track?.title, track?.artist?.name],
+    queryKey: ["trackLyrics", track?.title, track?.artist?.name, track?.id],
     queryFn: () =>
       track
-        ? fetchLyrics(track.title, track.artist.name, track.duration)
+        ? fetchLyrics(track.title, track.artist.name, track.duration, track.id)
         : Promise.resolve(null),
     enabled: !!track,
   });

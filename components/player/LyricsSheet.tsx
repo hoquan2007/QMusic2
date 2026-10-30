@@ -29,7 +29,7 @@ export function LyricsSheet() {
     let isMounted = true;
     setLoading(true);
 
-    fetchLyrics(currentTrack.title, currentTrack.artist.name, currentTrack.duration)
+    fetchLyrics(currentTrack.title, currentTrack.artist.name, currentTrack.duration, currentTrack.id)
       .then((data) => {
         if (isMounted) {
           setLyricsData(data);

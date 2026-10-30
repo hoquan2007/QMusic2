@@ -1,16 +1,17 @@
-# QMusic — Nền tảng Streaming Âm Nhạc Trực Tuyến Bản Quyền
+# QMusic — Nền tảng Streaming Âm Nhạc Trực Tuyến Bản Quyền & Nhạc Việt
 
-QMusic là một ứng dụng web nghe nhạc hiện đại, trực tiếp kết nối với các API âm nhạc hợp pháp và miễn phí (**Audius**, **LRCLIB**, **Jamendo**). Ứng dụng mang lại trải nghiệm streaming mượt mà, chuyên nghiệp với giao diện Dark Mode cao cấp, trình phát âm thanh liên tục xuyên suốt quá trình chuyển trang, hỗ trợ đồng bộ lời bài hát thời gian thực (LRC) và lưu trữ thư viện cá nhân mà không bắt buộc đăng nhập.
+QMusic là một ứng dụng web nghe nhạc hiện đại, kết nối với các nguồn âm nhạc trực tuyến phong phú gồm **Zing MP3 (Nhạc Việt Nam)**, **Audius (Nhạc Quốc Tế)**, **LRCLIB (Lời bài hát đồng bộ)** và **Jamendo**. Ứng dụng mang lại trải nghiệm streaming mượt mà, chuyên nghiệp với giao diện Dark Mode cao cấp, trình phát âm thanh liên tục xuyên suốt quá trình chuyển trang, hỗ trợ đồng bộ lời bài hát thời gian thực (LRC) và lưu trữ thư viện cá nhân mà không bắt buộc đăng nhập.
 
 ---
 
 ## 🌟 Tính năng nổi bật
 
-### 1. Nguồn nhạc thật & Khám phá phong phú
-- **Tích hợp Audius Protocol:** Khám phá hàng triệu bài hát thịnh hành (Trending), nghệ sĩ độc lập và danh sách phát công khai từ mạng lưới Audius.
-- **Phát trực tiếp (Live Stream):** Phát nhạc trực tiếp từ các node CDN chính thức với chất lượng cao (`audio/mpeg`), hỗ trợ tua và tải mượt mà.
-- **Lọc theo thể loại:** Khám phá nhạc theo các danh mục: Electronic, Hip-Hop/Rap, Pop, Rock, Ambient, Lo-Fi, R&B/Soul, Acoustic...
-- **Tìm kiếm đa năng (Live Search):** Tìm kiếm tức thời (debounced 350ms) theo bài hát, nghệ sĩ và danh sách phát với các bộ lọc thông minh.
+### 1. Nguồn Nhạc Việt & Quốc tế phong phú
+- **Tích hợp Nhạc Việt (Zing MP3):** Cập nhật liên tục bảng xếp hạng **#zingchart** Top 100 ca khúc thịnh hành nhất Việt Nam, tìm kiếm hàng triệu bài hát, nghệ sĩ V-Pop hàng đầu (Sơn Tùng M-TP, Đen Vâu, Vũ, Hoàng Thùy Linh, Nguyễn Vĩ, Quốc Thiên...).
+- **Tích hợp Audius Protocol:** Khám phá hàng triệu bài hát thịnh hành (Trending), nghệ sĩ độc lập và danh sách phát quốc tế từ mạng lưới Audius.
+- **Phát trực tiếp (Live Stream):** Luồng stream âm thanh chính thức với chất lượng cao (`audio/mpeg`), hỗ trợ tua và tải mượt mà.
+- **Lọc theo thể loại:** Khám phá nhạc theo các danh mục: Nhạc Việt (V-Pop), Electronic, Hip-Hop/Rap, Pop, Rock, Ambient, Lo-Fi, R&B/Soul, Acoustic...
+- **Tìm kiếm đa năng (Live Search):** Tìm kiếm tức thời (debounced 350ms) kết hợp cả kho nhạc Việt Nam và kho nhạc quốc tế.
 
 ### 2. Trình phát âm thanh đỉnh cao (Audio Engine)
 - **Kiến trúc Singleton:** Chỉ tồn tại duy nhất một đối tượng `HTMLAudioElement` toàn cục, đảm bảo không bị ngắt quãng khi người dùng điều hướng qua các trang.

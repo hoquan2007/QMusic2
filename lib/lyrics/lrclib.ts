@@ -71,13 +71,30 @@ function cleanSearchQuery(text: string): string {
 }
 
 /**
- * Fetch lyrics from LRCLIB
+ * Fetch lyrics from LRCLIB with Zing MP3 fallback for Vietnamese songs
  */
 export async function fetchLyrics(
   trackTitle: string,
   artistName: string,
-  duration?: number
+  duration?: number,
+  trackId?: string
 ): Promise<SyncedLyrics | null> {
+  // If track is from Zing MP3, check native Zing lyrics API first
+  if (trackId && trackId.startsWith("zingmp3:")) {
+    const rawId = trackId.replace(/^zingmp3:/, "");
+    try {
+      const vnRes = await fetchWithRetry<{ data: SyncedLyrics }>(
+        `/api/vietnam/lyric/${rawId}`,
+        { timeoutMs: 5000, retries: 1 }
+      );
+      if (vnRes?.data && (vnRes.data.lines?.length > 0 || vnRes.data.plainLyrics)) {
+        return vnRes.data;
+      }
+    } catch {
+      // Fallback to LRCLIB
+    }
+  }
+
   const cleanTitle = cleanSearchQuery(trackTitle);
   const cleanArtist = cleanSearchQuery(artistName);
 

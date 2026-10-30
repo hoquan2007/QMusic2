@@ -11,6 +11,7 @@ import { Compass, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES = [
+  { name: "Nhạc Việt (V-Pop)", desc: "Top V-Pop, Ballad, Rap Việt, Nhạc Trẻ", color: "from-rose-600 to-red-700" },
   { name: "Electronic", desc: "EDM, House, Techno, Dubstep", color: "from-purple-600 to-indigo-600" },
   { name: "Hip-Hop/Rap", desc: "Trap, Boom Bap, Drill, Lo-Fi Rap", color: "from-amber-600 to-rose-600" },
   { name: "Pop", desc: "Melodic, Synth-pop, Dance", color: "from-pink-600 to-purple-600" },
@@ -18,7 +19,6 @@ const CATEGORIES = [
   { name: "Ambient", desc: "Chill, Atmospheric, Meditation", color: "from-teal-600 to-cyan-600" },
   { name: "R&B/Soul", desc: "Contemporary R&B, Neo-Soul", color: "from-blue-600 to-indigo-700" },
   { name: "Lo-Fi", desc: "Chillhop, Study Beats, Instrumental", color: "from-emerald-600 to-teal-700" },
-  { name: "Acoustic", desc: "Folk, Unplugged, Fingerstyle", color: "from-yellow-600 to-amber-700" },
 ];
 
 export default function DiscoverPage() {
@@ -26,7 +26,10 @@ export default function DiscoverPage() {
 
   const { data: genreTracks = [], isLoading: isTracksLoading } = useQuery({
     queryKey: ["discoverTracks", selectedGenre],
-    queryFn: () => musicRegistry.getTrendingTracks(18, selectedGenre),
+    queryFn: () =>
+      selectedGenre === "Nhạc Việt (V-Pop)"
+        ? musicRegistry.getVietnameseTrendingTracks(18)
+        : musicRegistry.getTrendingTracks(18, selectedGenre),
   });
 
   const { data: playlists = [], isLoading: isPlaylistsLoading } = useQuery({

@@ -2,7 +2,7 @@
  * Universal Music Provider and Domain Models for QMusic
  */
 
-export type MusicProviderType = "audius" | "jamendo" | "custom";
+export type MusicProviderType = "audius" | "jamendo" | "zingmp3" | "custom";
 
 export interface MusicLicenseInfo {
   type: string;

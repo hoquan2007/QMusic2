@@ -50,7 +50,7 @@ export default function PlaylistDetailPage({ params }: PageProps) {
     error: remoteError,
   } = useQuery({
     queryKey: ["playlistDetail", playlistId],
-    queryFn: () => musicRegistry.getPlaylist(`audius:${playlistId}`),
+    queryFn: () => musicRegistry.getPlaylist(playlistId),
     enabled: !isLocal,
   });
 

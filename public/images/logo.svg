@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="qMusicLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="60%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" fill="#0f111a"/>
+  <!-- Q outer circle -->
+  <circle cx="95" cy="95" r="50" fill="none" stroke="url(#qMusicLogoGrad)" stroke-width="16" stroke-linecap="round"/>
+  <!-- Q music wave inside -->
+  <line x1="82" y1="90" x2="82" y2="100" stroke="#a78bfa" stroke-width="7" stroke-linecap="round"/>
+  <line x1="95" y1="80" x2="95" y2="110" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <line x1="108" y1="86" x2="108" y2="104" stroke="#22d3ee" stroke-width="7" stroke-linecap="round"/>
+  <!-- Q tail accent -->
+  <path d="M125 125 L155 155" stroke="url(#qMusicLogoGrad)" stroke-width="16" stroke-linecap="round"/>
+</svg>
+

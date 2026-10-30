@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --border: #e2e8f0;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.dark {
+  --background: #090a0f;
+  --foreground: #f8fafc;
+  --card: #12141d;
+  --card-foreground: #f8fafc;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* Range input styling for sleek audio sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.15);
+  height: 4px;
+  border-radius: 9999px;
+}
+
+.dark input[type="range"]::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:not(.dark) input[type="range"]::-webkit-slider-runnable-track {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -5px;
+  background-color: #8b5cf6;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background-color: #a78bfa;
+}
+
+/* Glassmorphism effects */
+.glass-panel {
+  background: rgba(18, 20, 29, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Sound wave animation */
+@keyframes soundWave {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+.animate-wave-1 {
+  animation: soundWave 1.1s ease-in-out infinite;
+}
+.animate-wave-2 {
+  animation: soundWave 0.8s ease-in-out 0.2s infinite;
+}
+.animate-wave-3 {
+  animation: soundWave 1.3s ease-in-out 0.4s infinite;
+}
+.animate-wave-4 {
+  animation: soundWave 0.9s ease-in-out 0.1s infinite;
+}
+
